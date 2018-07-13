@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "users"
   },
   handle: {
     type: String,
@@ -36,7 +36,7 @@ const ProfileSchema = new Schema({
   githubusername: {
     type: String
   },
-  experience: {
+  experience: [
     {
       title: {
         type: String,
@@ -64,8 +64,8 @@ const ProfileSchema = new Schema({
         type: String
       }
     }
-  },
-  education: {
+  ],
+  education: [
     {
       school: {
         type: String,
@@ -94,7 +94,7 @@ const ProfileSchema = new Schema({
         type: String
       }
     }
-  },
+  ],
   social: {
     youtube: {
       type: String
@@ -110,12 +110,12 @@ const ProfileSchema = new Schema({
     },
     instagram: {
       type: String
-    },
+    }
   },
   date: {
     type: Date,
     default: Date.now
   }
-})
+});
 
 module.exports = Profile = mongoose.model("profile", ProfileSchema);
