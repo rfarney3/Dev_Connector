@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import InputGroup from "../common/InputGroup";
 import SelectListGroup from "../common/SelectListGroup";
+import { createProfile } from "../../actions/profileActions";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -29,16 +31,36 @@ class CreateProfile extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
 
-    console.log("submit");
+    const profileData = {
+      handle: this.state.handle,
+      company: this.state.company,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      skills: this.state.skills,
+      githubusername: this.state.githubusername,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      youtube: this.state.youtube,
+      instagram: this.state.instagram
+    };
+
+    this.props.createProfile(profileData, this.props.history);
   };
 
   render() {
@@ -128,7 +150,7 @@ class CreateProfile extends Component {
                 <SelectListGroup
                   placeholder="Status"
                   name="status"
-                  value={this.state.handle}
+                  value={this.state.status}
                   onChange={this.onChange}
                   error={errors.status}
                   options={options}
@@ -139,7 +161,6 @@ class CreateProfile extends Component {
                   name="company"
                   value={this.state.company}
                   onChange={this.onChange}
-                  error={errors.handle}
                   info="Could be your own company or one that you work for"
                 />
                 <TextFieldGroup
@@ -147,7 +168,6 @@ class CreateProfile extends Component {
                   name="website"
                   value={this.state.website}
                   onChange={this.onChange}
-                  error={errors.handle}
                   info="Could be your own website or a company one"
                 />
                 <TextFieldGroup
@@ -155,7 +175,6 @@ class CreateProfile extends Component {
                   name="location"
                   value={this.state.location}
                   onChange={this.onChange}
-                  error={errors.handle}
                   info="City or city & state suggested (eg. San Francisco, CA)"
                 />
                 <TextFieldGroup
@@ -171,7 +190,6 @@ class CreateProfile extends Component {
                   name="githubusername"
                   value={this.state.githubusername}
                   onChange={this.onChange}
-                  error={errors.handle}
                   info="If you want your latest repos and a GitHub link, include your username"
                 />
                 <TextAreaFieldGroup
@@ -179,12 +197,12 @@ class CreateProfile extends Component {
                   name="bio"
                   value={this.state.bio}
                   onChange={this.onChange}
-                  error={errors.handle}
                   info="Tell us a little more about yourself!"
                 />
 
                 <div className="mb-3">
                   <button
+                    type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
@@ -221,4 +239,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));
