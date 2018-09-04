@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
-import PropTypes from "prop-types";
-import Profile from "./Profile";
 
 class ProfileCreds extends Component {
   render() {
