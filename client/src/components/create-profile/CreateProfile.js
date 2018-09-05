@@ -9,27 +9,23 @@ import SelectListGroup from "../common/SelectListGroup";
 import { createProfile } from "../../actions/profileActions";
 
 class CreateProfile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      displaySocialInputs: false,
-      handle: "",
-      company: "",
-      website: "",
-      location: "",
-      status: "",
-      skills: "",
-      githubusername: "",
-      bio: "",
-      twitter: "",
-      facebook: "",
-      linkedin: "",
-      youtube: "",
-      instagram: "",
-      errors: {}
-    };
-  }
+  state = {
+    displaySocialInputs: false,
+    handle: "",
+    company: "",
+    website: "",
+    location: "",
+    status: "",
+    skills: "",
+    githubusername: "",
+    bio: "",
+    twitter: "",
+    facebook: "",
+    linkedin: "",
+    youtube: "",
+    instagram: "",
+    errors: {}
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {

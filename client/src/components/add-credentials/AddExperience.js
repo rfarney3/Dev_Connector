@@ -7,25 +7,17 @@ import PropTypes from "prop-types";
 import { addExperience } from "../../actions/profileActions";
 
 class AddExperience extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      company: "",
-      title: "",
-      location: "",
-      from: "",
-      to: "",
-      current: false,
-      description: "",
-      errors: {},
-      disabled: false
-    };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onCheck = this.onCheck.bind(this);
-  }
+  state = {
+    company: "",
+    title: "",
+    location: "",
+    from: "",
+    to: "",
+    current: false,
+    description: "",
+    errors: {},
+    disabled: false
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -35,20 +27,20 @@ class AddExperience extends Component {
     }
   }
 
-  onCheck(e) {
+  onCheck = e => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
     });
-  }
+  };
 
-  onChange(e) {
+  onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
+  };
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
     const expData = {
       company: this.state.company,
@@ -61,7 +53,7 @@ class AddExperience extends Component {
     };
 
     this.props.addExperience(expData, this.props.history);
-  }
+  };
 
   render() {
     const { errors } = this.state;

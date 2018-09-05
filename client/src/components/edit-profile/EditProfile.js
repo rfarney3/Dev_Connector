@@ -10,27 +10,23 @@ import { createProfile, getCurrentProfile } from "../../actions/profileActions";
 import isEmpty from "../../validation/is-empty";
 
 class CreateProfile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      displaySocialInputs: false,
-      handle: "",
-      company: "",
-      website: "",
-      location: "",
-      status: "",
-      skills: "",
-      githubusername: "",
-      bio: "",
-      twitter: "",
-      facebook: "",
-      linkedin: "",
-      youtube: "",
-      instagram: "",
-      errors: {}
-    };
-  }
+  state = {
+    displaySocialInputs: false,
+    handle: "",
+    company: "",
+    website: "",
+    location: "",
+    status: "",
+    skills: "",
+    githubusername: "",
+    bio: "",
+    twitter: "",
+    facebook: "",
+    linkedin: "",
+    youtube: "",
+    instagram: "",
+    errors: {}
+  };
 
   componentDidMount() {
     this.props.getCurrentProfile();
