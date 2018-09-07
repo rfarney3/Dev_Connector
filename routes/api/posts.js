@@ -186,7 +186,7 @@ router.post(
         };
 
         // Add to comments array
-        post.comments.unshift(newComment);
+        post.comments.push(newComment);
 
         // Save
 
